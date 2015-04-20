@@ -8,17 +8,21 @@ class PlayerTest(unittest.TestCase):
         self.player = Player()
         self.game_state = {}
 
-        with open('gamestate.json') as json_file:
+        with open('APairGameState.json') as json_file:
             self.game_state = json.load(json_file)
 
     def test_bet_request_should_return_integer(self):
         self.assertIsInstance(self.player.betRequest(self.game_state), int)
 
-    def test_bet_1000_when_ace_pair(self):
-        with open('gamestate.json') as json_file:
+    def test_bet_1800_when_ace_pair(self):
+        with open('APairGameState.json') as json_file:
             game_state = json.load(json_file)
-        print game_state['players'][game_state['in_action']]['hole_cards'][0]['rank']
-        self.assertEqual(self.player.betRequest(self.game_state), 1590)
+        self.assertEqual(self.player.betRequest(game_state), 1800)
+
+    def test_bet_600_when_pair(self):
+        with open('PairGameState.json') as json_file:
+            game_state = json.load(json_file)
+        self.assertEqual(self.player.betRequest(game_state), 600)
 
 if __name__ == '__main__':
     unittest.main()
