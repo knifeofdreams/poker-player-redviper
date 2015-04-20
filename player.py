@@ -15,9 +15,10 @@ class Player:
 
         ACE_PAIR = game_state['players'][game_state['in_action']]['hole_cards'][0]['rank'] == 'A' and \
                    game_state['players'][game_state['in_action']]['hole_cards'][1]['rank'] == 'A'
+
         if ACE_PAIR:
             return game_state['players'][game_state['in_action']]['stack']
-        elif ONE_HIGH_CARD:
+        elif ONE_HIGH_CARD or OTHER_HIGH_CARD:
             return game_state['players'][game_state['in_action']]['stack']/6
         else:
             return 100
